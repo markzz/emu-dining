@@ -9,6 +9,10 @@ function get_header($title="") {
 	include "header.php";
 }
 
+function get_footer() {
+	include "footer.php";
+}
+
 function menu_exists($name) {
 	$dbh = DB::connect();
 
