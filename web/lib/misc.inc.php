@@ -17,8 +17,7 @@ function menu_exists($name) {
 	$q.= "WHERE short_name = " . $dbh->quote($name);
 
 	$result = $dbh->query($q);
-
-	if (!$result) {
+	if ($result->rowCount() == 0) {
 		return false;
 	}
 
