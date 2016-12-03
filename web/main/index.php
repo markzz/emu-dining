@@ -18,7 +18,7 @@ if ($path == "") {
 			include "./404.php";
 			return;
 		}
-
+		include "pages/menu.php";
 		return;
 	}
 	header("Location: /");
