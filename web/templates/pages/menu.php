@@ -1,4 +1,4 @@
 <?php get_header("Menu") ?>
 
 
-<?php footer() ?>
+<?php get_footer() ?>
