@@ -15,7 +15,7 @@ class DB {
 				die("Failure connecting to DB");
 			}
 
-			return self::$dbh;
 		}
+		return self::$dbh;
 	}
 }
