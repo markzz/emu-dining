@@ -1,5 +1,4 @@
-<? header("Menu") ?>
+<?php header("Menu") ?>
 
 
-
-<? footer() ?>
+<?php footer() ?>
