@@ -19,9 +19,9 @@ if ($path == "") {
 			return;
 		}
 
+		return;
 	}
-
-	echo $tokens[0];
+	header("Location: /");
 } else {
 	switch ($path) {
 		default:

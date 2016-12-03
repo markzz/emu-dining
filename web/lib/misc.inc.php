@@ -14,7 +14,7 @@ function menu_exists($name) {
 
 	$q = "SELECT id ";
 	$q.= "FROM locations ";
-	$q.= "WHERE short_name = " . $name;
+	$q.= "WHERE short_name = " . $dbh->quote($name);
 
 	$result = $dbh->query($q);
 
