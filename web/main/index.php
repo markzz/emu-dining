@@ -8,7 +8,7 @@ $path = isset($_GET["p"]) ? $_GET["p"] : "";
 $tokens = preg_split('/\//', $path);
 
 if ($path == "") {
-	/* TODO: Implement */
+	include('home.php');
 } else if ('/' . $tokens[0] == get_login_path()) {
 	/* TODO: Implement login */
 } else if ('/' . $tokens[0] == get_menu_path()) {
