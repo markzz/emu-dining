@@ -4,12 +4,7 @@ set_include_path(get_include_path() . PATH_SEPARATOR . "../lib" . PATH_SEPARATOR
 
 include_once "misc.inc.php";
 
-echo "<pre>";
-var_dump($_POST);
-var_dump($_GET);
-echo "</pre>";
-
-$path = $_GET["p"];
+$path = isset($_GET["p"]) ? $_GET["p"] : "";
 $tokens = preg_split('/\//', $path);
 
 if ($path == "") {
