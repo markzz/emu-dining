@@ -7,7 +7,6 @@ $path = isset($_GET["p"]) ? $_GET["p"] : "";
 $tokens = preg_split('/\//', $path);
 
 
-
 if ($path == "") {
 	include "pages/home.php";
 } else if ('/' . $tokens[0] == LOGIN_PATH) {
