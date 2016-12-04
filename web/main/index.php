@@ -35,8 +35,10 @@ if ($path == "") {
 	delete_rating();
 } else if('/' . $tokens[0] == AUTH_PATH) {
 	auth();
-}
-else {
+} else if ('/' . $tokens[0] == LOGOUT_PATH) {
+	log_out();
+	header("Location: /");
+} else {
 	switch ($path) {
 		default:
 			header("HTTP/1.0 404 Not Found");

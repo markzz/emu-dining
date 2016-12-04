@@ -100,3 +100,7 @@ function get_user_id() {
 function is_logged_in() {
 	return get_user_id() ? true : false;
 }
+
+function log_out() {
+	unset($_SESSION['access_token']);
+}
