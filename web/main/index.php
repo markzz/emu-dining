@@ -9,9 +9,9 @@ $tokens = preg_split('/\//', $path);
 
 if ($path == "") {
 	include "pages/home.php";
-} else if ('/' . $tokens[0] == get_login_path()) {
+} else if ('/' . $tokens[0] == LOGIN_PATH) {
 	include "pages/login.php";
-} else if ('/' . $tokens[0] == get_menu_path()) {
+} else if ('/' . $tokens[0] == MENU_PATH) {
 	if (!empty($tokens[1])) {
 		if (!menu_exists($tokens[1])) {
 			header("HTTP/1.0 404 Not Found");
@@ -22,7 +22,22 @@ if ($path == "") {
 		return;
 	}
 	header("Location: /");
-} else {
+} else if('/' . $tokens[0] == RATINGS_PATH) {
+	if (!empty($tokens[1])) {
+		$item_id = $tokens[1];
+		include "modals/ratings.php";
+		return;
+	}
+	header("Location: /");
+}else if('/' . $tokens[0] == CREATE_RATING_PATH) {
+	if (!empty($tokens[1])) {
+		$item_id = $tokens[1];
+		include "modals/ratings.php";
+		return;
+	}
+	header("Location: /");
+}
+else {
 	switch ($path) {
 		default:
 			header("HTTP/1.0 404 Not Found");
