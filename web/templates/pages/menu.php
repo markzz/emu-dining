@@ -18,7 +18,7 @@ $earliest_date = date('Y-m-j', time()-(60*60*24*20));
 $future_date = date('Y-m-j', time()+(60*60*24*20));
 $dates = create_date_range($earliest_date, $future_date);
 
-foreach($dates as $d) {
+/*foreach($dates as $d) {
     $dates2[] = [
         'weekday' => date('l', strtotime($d)),
         'day' => date('j', strtotime($d)),
@@ -26,129 +26,17 @@ foreach($dates as $d) {
         'formatted' => $d
     ];
 }
-$json_date = json_encode($dates2);
+$json_date = json_encode($dates2);*/
 
 // Header
 get_header("Menu");
 ?>
 
-<style>
-.your-rating {
-    cursor: pointer;
-}
-.your-rating span.glyphicon-star {
-    color: #ddd;
-}
-span.glyphicon-star.on {
-    color: #f4c542;
-}
-.review-panel {
-    display: none;
-}
-</style>
-
 <script>
-
-var dates = <?= $json_date ?>;
-
-function loadRatings(id) {
-    $('.rating-box[data-id='+id+']').html('<center>Loading ratings...</center>').load('/ratings/'+id);
-}
-
-$(document).ready(function() {
-    var $star_rating = $('.your-rating .star');
-
-    $(document).on('click', '.your-rating .star', function() {
-        var id = $(this).parent().data('id');
-        var rating = $(this).data('rating');
-        $('form[data-id='+id+'] input[name=rating]').val($(this).data('rating'));
-        $('.your-rating[data-id='+id+'] .star').removeClass('on');
-        $(this).addClass('on')
-               .prevAll('.your-rating[data-id='+id+'] .star')
-               .addClass('on');
-    });
-
-    if(window.location.hash) {
-        var hash = window.location.hash;
-        var split = hash.split('_item_');
-        var tab = split[0];
-        tab = tab.substring(1);
-        var id = split[1];
-        $('.nav li a[href="#'+tab+'"]').tab('show');
-        $('#modal_'+tab+'_'+id).modal('show');
-    }
-
-    $('.modal').on('hidden.bs.modal', function () {
-        window.location.hash = '';
-    });
-
-    $('.modal').on('shown.bs.modal',function() {
-        var id = $(this).attr('data-id');
-        var tab = $(this).data('tab');
-        loadRatings(id);
-        window.location.hash = tab+'_item_'+id;
-        document.cookie = 'return_url=' + window.location + '; expires=Thu, 2 Aug 2030 20:47:11 UTC; path=/';
-    });
-
-    $(document).on('click', '.review-btn', function() {
-        $(this).next('.review-panel').show();
-        $(this).hide();
-    });
-
-    $(document).on('click', '.review-panel .cancel', function() {
-        $(this).closest('.review-panel').prev('.review-btn').show();
-        $(this).closest('.review-panel').hide();
-    });
-
-    $(document).on('submit', 'form.review', function(e) {
-        var id = $(this).data('id');
-        var rating = $('input[name="rating"]', this).val();
-        var text = $('textarea[name="text"]', this).val();
-        if($('input[name=rating]', this).val() < 1 || $('input[name=rating]', this).val() > 5) {
-            alert('Please select a rating.');
-            return false;
-        }
-        $.ajax({
-            method: 'post',
-            url: '/create_rating',
-            data: {
-                'item_id': id,
-                'rating': rating,
-                'text': text
-            },
-            success: function(data) {
-                loadRatings(id);
-            }
-        });
-        e.preventDefault();
-    });
-
-    $(document).on('click', '.delete-review', function() {
-        var id = $(this).data('id');
-        if(!confirm("Delete your review?")) return false;
-        $.ajax({
-            method: 'post',
-            url: '/delete_rating',
-            data: {
-                'id': id
-            },
-            success: function(data) {
-                loadRatings(id);
-            }
-        })
-    });
-
-    var middleElement = $('.date-wrapper.active').data('date');
-    var currentPosition = dates[middleElement];
-
-    console.log(currentPosition);
-
-    $('#cal-right').click(function() {
-    });
-    $('#cal-left').click(function() {
-        console.log(dates);
-    });
-
+$('#date-picker').submit(function(e) {
+    var date = $('input', this).val();
+    window.location = '/menu/' + '<?=addslashes($location_info['short_name'])?>/' + date;
+    e.preventDefault();
 });
 </script>
 
@@ -161,7 +49,7 @@ $(document).ready(function() {
     </button>
     <ul class="dropdown-menu" aria-labelledby="locationsDropdown" id="locationsDropdownMenu">
         <?php foreach($locations as $location): ?>
-        <li><a href="/menu/<?=$location['short_name']?>"><?=$location['name']?></a></li>
+        <li><a href="/menu/<?=$location['short_name']?>/<?=$date?>"><?=$location['name']?></a></li>
         <?php endforeach; ?>
     </ul>
   </div>
@@ -205,6 +93,18 @@ $(document).ready(function() {
   <div class="glyphicon glyphicon-chevron-right" id="cal-right">
   </div>
 </div>
+
+<div class="dateSearchWrapper">
+    <form method="post" id="date-picker">
+      <div class="input-group input-datepicker show-input">
+            <input type="date" class="form-control" data-format="YYYY/MM/DD" placeholder="YYYY/MM/DD">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-circle-arrow-right"></span></button>
+            </span>
+      </div>
+    </form>
+</div>
+
 <br />
 <div>
 
@@ -219,37 +119,12 @@ $(document).ready(function() {
 
   </ul>
 
-  <!--<div class="panel panel-default">
-        <div class="panel-heading">
-          <h4 class="panel-title">
-            <a id="clickableFoodItem">Grilled Chicken Caesar Wrap </a>
-            <div id="foodDesc">Classic Caesar with a fresh squeeze of lemon adds zing to this classic wrap</div>
-          </h4>
-
-          <div id="dietWrapper">
-            <img onclick="changeModalText('Food that has balanced nutrients &amp; portion size', 'Balanced')" data-toggle="modal" data-target=".bs-example-modal-sm" class="icon" src="images/img/icon_balanced_200px.png ">
-            <img onclick="changeModalText('Containing a sustainable ingredient, such as local produce or seafood', 'Sustainable')" data-toggle="modal" data-target=".bs-example-modal-sm" class="icon" src="images/img/icon_sustainable_200px.png ">
-            <img onclick="changeModalText('Vegan menu options are free of all animal-based ingredients and by-products', 'Vegan')" data-toggle="modal" data-target=".bs-example-modal-sm" class="icon" src="images/img/icon_vegan_200px.png ">
-            <img onclick="changeModalText('Containing no solid meat but may contain eggs or dairy', 'Vegetarian')" data-toggle="modal" data-target=".bs-example-modal-sm" class="icon" src="images/img/icon_vegetarian_200px.png ">
-          </div>
-
-          <div id="extraInfo" class="rightExtraInfo">
-            <h3 class="panel-title" style="width: 150px;">
-                <strong style="margin-right: 30px;">1</strong>
-            </h3>
-            <h3 class="panel-title" style="width: 150px;">
-                <strong style="margin-left: 87px;">2</strong>
-            </h3>
-          </div>
-        </div>
-      </div>-->
-
   <!-- Tab panes -->
   <div class="tab-content">
     <?php if(count($periods) == 0): ?>
         <br><br>
         <div class="alert alert-info">
-        The student center is closed today.
+        <?=$location_info['name']?> is closed today.
         </div>
     <?php endif; ?>
 
@@ -262,30 +137,25 @@ $(document).ready(function() {
 
                 <table class="table table-responsive">
                 <tr>
-                    <th class="col-md-3"></th>
-                    <th class="col-md-3"></th>
+                    <th></th>
+                    <th></th>
                     <th class="extraInfo">Portion</th>
                     <th class="extraInfo">Calories</th>
                 </tr>
                 <?php foreach($category->items as $item): ?>
                     <tr>
                         <td>
-                            <div class="pull-left">
                                 <b><a href="#" class="menu-item-link" data-toggle="modal" data-id="<?=$item->id?>" data-target="#modal_<?=$period->id.'_'.$item->id?>"><?=$item->name?></a></b>
                                 <br />
                                 <div class="foodDesc"><?=$item->desc?></div>
-                            </div>
-                            <div class="dietWrapper pull-left">
-                                
-                            </div>
                             <div class="clearfix"></div>
                         </td>
-                        <td><?php echo generate_filter_icons_html($item->filters, 30); ?></td>
+                        <td><div class="dietWrapper"><?php echo generate_filter_icons_html($item->filters, 30); ?></div></td>
                         <td class="extraInfo"><?=$item->portion?></td>
-                        <td class="extraInfo"><?=$item->calories?> calories</td>
+                        <td class="extraInfo"><?=$item->calories?></td>
                     </tr>
 
-                    <div class="modal fade" tabindex="-1" role="dialog" id="modal_<?=$period->id.'_'.$item->id?>" data-id="<?=$item->id?>" data-tab="<?=$period->id?>">
+                    <div class="modal item-modal fade" tabindex="-1" role="dialog" id="modal_<?=$period->id.'_'.$item->id?>" data-id="<?=$item->id?>" data-tab="<?=$period->id?>">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -340,6 +210,22 @@ $(document).ready(function() {
     <?php endforeach; ?>
   </div>
 
+</div>
+
+<!-- Dietary Key modals -->
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title" id="dietModalTitle">Default title</h4> </div>
+      <div class="modal-body">
+        <p id="dietModal"></p>
+        <p>
+        </p>
+      </div>
+    </div>
+  </div>
 </div>
 
 <?php get_footer() ?>

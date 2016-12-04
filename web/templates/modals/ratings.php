@@ -2,7 +2,7 @@
 $rating = get_avg_rating($item_id);
 ?>
 
-<div class="row">
+<div class="row" style="position:relative;">
     <div class="col-md-8">
 
         <?php 
@@ -57,7 +57,7 @@ $rating = get_avg_rating($item_id);
                 <?php echo generate_rating_html($rating); ?>
             </div>
         </div>
-        <a href="javascript:void(0);">View Reviews...</a>
+        <a href="javascript:void(0);" class="view-reviews">View Reviews...</a>
         <?php else: ?>
         <em>There aren't enough ratings yet. Leave your review today!</em>
         <?php endif; ?>
