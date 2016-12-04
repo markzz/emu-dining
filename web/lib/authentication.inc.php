@@ -43,7 +43,6 @@ function get_user_name() {
 	$client->setRedirectUri($redirect_uri);
 	$client->setScopes("email");
 
-	var_dump($_SESSION);
 	if (isset($_SESSION['access_token'])) {
 		$data = $client->verifyIdToken($_SESSION['access_token']['id_token']);
 	}
@@ -58,7 +57,6 @@ function get_user_name_from_id($id) {
 	$client->setDeveloperKey($dev_key);
 	$client->setAuthConfig("../../conf/google_client_id.json");
 	$client->setRedirectUri($redirect_uri);
-//	$client->setRedirectUri("http://localhost:8080/?p=auth");
 	$client->setScopes("email");
 
 	$service = new Google_Service_Plus($client);
