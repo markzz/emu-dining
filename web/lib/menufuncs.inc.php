@@ -39,4 +39,38 @@ function get_menu($date, $location_id) {
     return $json_arr;
 }
 
+/**
+ * Generates html for filter icons
+ */
+function generate_filter_icons_html($filters, $img_width = 40) {
+    $filter_icons = [
+        'Balanced U'  => 'balanced',
+        'Vegetarian'  => 'vegetarian',
+        'Vegan'       => 'vegan',
+        'Sustainable' => 'sustainable'
+    ];
+    $html = '';
+    foreach($filters as $filter) {
+        if(array_key_exists($filter->name, $filter_icons)) {
+        $html .= '<img src="/assets/img/icon_'.$filter_icons[$filter->name].'.png" style="width:'.$img_width.'px" />';
+        }
+    }
+    return $html;
+}
+
+function get_avg_rating($item_id) {
+    $dbh = DB::connect();
+
+    $q = "SELECT `id`, AVG(`rating`) as `avg` ";
+    $q.= "FROM `reviews` ";
+    $q.= "WHERE item_id = " . $dbh->quote($item_id);
+
+    $result = $dbh->query($q);
+    if(!$result) return false;
+
+    $data = $result->fetch(PDO::FETCH_ASSOC);
+
+    return $data['avg'];
+}
+
 //var_dump(get_menu(date('Y-m-j', time()), "57d6ed562cc8da6ce636371a"));
