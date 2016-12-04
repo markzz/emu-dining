@@ -7,9 +7,10 @@ $ROUTES = array(
 	"/login" => "login.php",
 );
 
-$MENU_PATH = "/menu";
-$LOGIN_PATH = "/login";
-$AUTH_PATH = "/auth";
+const MENU_PATH = "/menu";
+const LOGIN_PATH = "/login";
+const RATINGS_PATH = "/ratings";
+const CREATE_RATING_PATH = "/create_rating";
 
 function get_route() {
 	global $ROUTES;
@@ -17,19 +18,4 @@ function get_route() {
 	$path = rtrim('/');
 
 	return isset($ROUTES[$path]) ? $ROUTES[$path] : null;
-}
-
-function get_menu_path() {
-	global $MENU_PATH;
-	return $MENU_PATH;
-}
-
-function get_login_path() {
-	global $LOGIN_PATH;
-	return $LOGIN_PATH;
-}
-
-function get_auth_path() {
-	global $AUTH_PATH;
-	return $AUTH_PATH;
 }
