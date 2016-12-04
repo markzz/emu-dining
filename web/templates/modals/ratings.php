@@ -5,6 +5,7 @@ $rating = round(get_avg_rating($item_id));
 <div class="row">
     <div class="col-md-8">
 
+        <?php if(is_logged_in()): ?>
         <button class="btn btn-primary btn-sm review-btn" style="margin-top:10px;">Review This Item</button>
         
         <div class="review-panel">
@@ -29,6 +30,12 @@ $rating = round(get_avg_rating($item_id));
                 <button class="btn btn-default btn-sm cancel" type="button">Cancel</button>
             </form>
         </div>
+        
+        <?php else: ?>
+
+        <a href="/login">Login</a> to leave a review.
+
+        <?php endif; ?>
 
     </div>
     <div class="col-md-4">

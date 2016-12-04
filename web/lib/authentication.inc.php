@@ -4,9 +4,8 @@ set_include_path(get_include_path() . PATH_SEPARATOR . "../../vendor/");
 
 include_once "autoload.php";
 
-$dev_key = "";
-$redirect_uri = "http://emudining.co:8888/auth";
-
+$dev_key = config_get('options', 'dev-key');
+$redirect_uri = config_get('options', 'redirect-uri');
 
 function login() {
 	global $dev_key, $redirect_uri;
@@ -27,7 +26,7 @@ function auth() {
 
 	$client->setDeveloperKey($dev_key);
 	$client->setAuthConfig("../../conf/google_client_id.json");
-	//$client->setRedirectUri($redirect_uri);
+	$client->setRedirectUri($redirect_uri);
 	$client->setScopes("email");
 
 	$client->authenticate($_GET['code']);

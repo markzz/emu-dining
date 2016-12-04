@@ -2,3 +2,5 @@
 .DS_Store
 data/*.json
 vendor
+conf/config
+conf/google_client_id.json

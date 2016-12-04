@@ -45,20 +45,23 @@ $(document).ready(function() {
 
     if(window.location.hash) {
         var hash = window.location.hash;
-        var matches;
-        if(matches = hash.match(/item_(.*)/)) {
-
-        }
+        var split = hash.split('_item_');
+        var tab = split[0];
+        tab = tab.substring(1);
+        var id = split[1];
+        $('.nav li a[href="#'+tab+'"]').tab('show');
+        $('#modal_'+tab+'_'+id).modal('show');
     }
 
     $('.modal').on('hidden.bs.modal', function () {
-            window.location.hash = '';
+        window.location.hash = '';
     });
 
-    $('.menu-item-link').click(function() {
-        var id = $(this).data('id');
+    $('.modal').on('shown.bs.modal',function() {
+        var id = $(this).attr('data-id');
+        var tab = $(this).data('tab');
         loadRatings(id);
-        window.location.hash = 'item_'+id;
+        window.location.hash = tab+'_item_'+id;
     });
 
     $(document).on('click', '.review-btn', function() {
@@ -110,7 +113,7 @@ $(document).ready(function() {
                 <?php foreach($category->items as $item): ?>
 
                     <li>
-                        <b><a href="#" class="menu-item-link" data-toggle="modal" data-id="<?=$item->id?>" data-target="#<?=$item->id?>"><?=$item->name?></a></b>, 
+                        <b><a href="#" class="menu-item-link" data-toggle="modal" data-id="<?=$item->id?>" data-target="#modal_<?=$period->id.'_'.$item->id?>"><?=$item->name?></a></b>, 
                         <?=$item->portion?>, <?=$item->calories?> calories
                         <p><?=$item->desc?></p>
                         <p>
@@ -118,7 +121,7 @@ $(document).ready(function() {
                         </p>
                     </li>
 
-                    <div class="modal fade" tabindex="-1" role="dialog" id="<?=$item->id?>">
+                    <div class="modal fade" tabindex="-1" role="dialog" id="modal_<?=$period->id.'_'.$item->id?>" data-id="<?=$item->id?>" data-tab="<?=$period->id?>">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
