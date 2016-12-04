@@ -12,6 +12,7 @@ const LOGIN_PATH = "/login";
 const AUTH_PATH = "/auth";
 const RATINGS_PATH = "/ratings";
 const CREATE_RATING_PATH = "/create_rating";
+const DELETE_RATING_PATH = "/delete_rating";
 
 function get_route() {
 	global $ROUTES;

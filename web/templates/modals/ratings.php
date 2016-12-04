@@ -1,11 +1,20 @@
 <?php
-$rating = round(get_avg_rating($item_id));
+$rating = get_avg_rating($item_id);
 ?>
 
 <div class="row">
     <div class="col-md-8">
 
-        <?php if(is_logged_in()): ?>
+        <?php 
+        if(has_user_reviewed($item_id)): 
+        $review = fetch_review_by_user(get_user_id(), $item_id); 
+
+        ?>
+        <h5>Your Review <span style="font-size:12px">(<a href="javascript:;" class="delete-review" data-id="<?=$item_id?>">delete</a>)</span></h5>
+        <?php echo generate_rating_html($review['rating']); ?>
+        <p><em><?= $review['text']?></em></p>
+
+        <?php elseif(is_logged_in()): ?>
         <button class="btn btn-primary btn-sm review-btn" style="margin-top:10px;">Review This Item</button>
         
         <div class="review-panel">
@@ -30,7 +39,7 @@ $rating = round(get_avg_rating($item_id));
                 <button class="btn btn-default btn-sm cancel" type="button">Cancel</button>
             </form>
         </div>
-        
+
         <?php else: ?>
 
         <a href="/login">Login</a> to leave a review.
@@ -45,15 +54,12 @@ $rating = round(get_avg_rating($item_id));
         <?php if($rating > 1): ?>
         <div class="rating-box" data-id="<?=$item->id?>">
             <div class="avg-rating" style="font-size:22px;">
-                <span class="glyphicon glyphicon-star <?php if($rating > 0) echo 'on'; ?>"></span>
-                <span class="glyphicon glyphicon-star <?php if($rating >= 2) echo 'on'; ?>"></span>
-                <span class="glyphicon glyphicon-star <?php if($rating >= 3) echo 'on'; ?>"></span>
-                <span class="glyphicon glyphicon-star <?php if($rating >= 4) echo 'on'; ?>"></span>
-                <span class="glyphicon glyphicon-star <?php if($rating >= 5) echo 'on'; ?>"></span>
+                <?php echo generate_rating_html($rating); ?>
             </div>
         </div>
+        <a href="javascript:void(0);">View Reviews...</a>
         <?php else: ?>
-        <em>There aren't enough ratings yet.</em>
+        <em>There aren't enough ratings yet. Leave your review today!</em>
         <?php endif; ?>
 
     </div>
