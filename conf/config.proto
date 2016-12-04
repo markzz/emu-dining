@@ -1,0 +1,11 @@
+[database]
+backend = mysql
+host = 45.63.67.185
+user = emu_menu
+name = emu_menu
+password = "something really obscure"
+
+[options]
+dev-key = something
+redirect-uri = http://localhost:8080/?p=auth
+
