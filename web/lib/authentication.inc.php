@@ -7,7 +7,6 @@ include_once "autoload.php";
 $dev_key = config_get('options', 'dev-key');
 $redirect_uri = config_get('options', 'redirect-uri');
 
-
 function login() {
 	global $dev_key, $redirect_uri;
 	
@@ -81,4 +80,8 @@ function get_user_id() {
 	} else {
 		return null;
 	}
+}
+
+function is_logged_in() {
+	return isset($_SESSION['access_token']);
 }
