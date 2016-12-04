@@ -1,3 +1,0 @@
-[submodule "google-oauth"]
-	path = google-oauth
-	url = https://github.com/google/google-api-php-client.git
