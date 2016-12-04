@@ -82,3 +82,7 @@ function get_user_id() {
 		return null;
 	}
 }
+
+function is_logged_in() {
+	return isset($_SESSION['access_token']);
+}
