@@ -1,7 +1,6 @@
 <?php
-
 set_include_path(get_include_path() . PATH_SEPARATOR . "../lib" . PATH_SEPARATOR . "../templates");
-
+session_start();
 include_once "misc.inc.php";
 
 $path = isset($_GET["p"]) ? $_GET["p"] : "";
@@ -10,7 +9,9 @@ $tokens = preg_split('/\//', $path);
 if ($path == "") {
 	include "pages/home.php";
 } else if ('/' . $tokens[0] == get_login_path()) {
-	include "pages/login.php";
+	login();
+} else if ("/" . $tokens[0] == get_auth_path()) {
+	auth();
 } else if ('/' . $tokens[0] == get_menu_path()) {
 	if (!empty($tokens[1])) {
 		if (!menu_exists($tokens[1])) {

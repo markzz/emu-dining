@@ -9,6 +9,7 @@ $ROUTES = array(
 
 $MENU_PATH = "/menu";
 $LOGIN_PATH = "/login";
+$AUTH_PATH = "/auth";
 
 function get_route() {
 	global $ROUTES;
@@ -26,4 +27,9 @@ function get_menu_path() {
 function get_login_path() {
 	global $LOGIN_PATH;
 	return $LOGIN_PATH;
+}
+
+function get_auth_path() {
+	global $AUTH_PATH;
+	return $AUTH_PATH;
 }

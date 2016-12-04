@@ -5,6 +5,7 @@ set_include_path(get_include_path() . PATH_SEPARATOR . "../lib");
 include_once "DB.class.php";
 include_once "routes.inc.php";
 include_once "menufuncs.inc.php";
+include_once "authentication.inc.php";
 
 function get_header($title="") {
 	include "header.php";
