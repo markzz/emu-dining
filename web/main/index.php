@@ -6,9 +6,12 @@ include_once "misc.inc.php";
 $path = isset($_GET["p"]) ? $_GET["p"] : "";
 $tokens = preg_split('/\//', $path);
 
+
+
 if ($path == "") {
 	include "pages/home.php";
 } else if ('/' . $tokens[0] == LOGIN_PATH) {
+	login();
 	include "pages/login.php";
 } else if ('/' . $tokens[0] == MENU_PATH) {
 	if (!empty($tokens[1])) {
@@ -35,6 +38,9 @@ if ($path == "") {
 		return;
 	}
 	header("Location: /");
+}
+else if('/' . $tokens[0] == AUTH_PATH) {
+	auth();
 }
 else {
 	switch ($path) {
