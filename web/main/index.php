@@ -29,15 +29,11 @@ if ($path == "") {
 		return;
 	}
 	header("Location: /");
-}else if('/' . $tokens[0] == CREATE_RATING_PATH) {
-	if (!empty($tokens[1])) {
-		$item_id = $tokens[1];
-		include "modals/ratings.php";
-		return;
-	}
-	header("Location: /");
-}
-else if('/' . $tokens[0] == AUTH_PATH) {
+} else if('/' . $tokens[0] == CREATE_RATING_PATH) {
+	create_rating();
+} else if('/' . $tokens[0] == DELETE_RATING_PATH) {
+	delete_rating();
+} else if('/' . $tokens[0] == AUTH_PATH) {
 	auth();
 }
 else {

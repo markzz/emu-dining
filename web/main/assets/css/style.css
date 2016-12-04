@@ -1,0 +1,254 @@
+li{
+    text-align: center;
+    cursor: pointer;
+}
+
+a{
+    text-align: center;
+}
+
+#locationsDropdown{
+    width: 250px;
+    height: 40px;
+    font-size: 18px;
+}
+
+#locationsDropdownMenu{
+    width: 250px;
+}
+
+#highlighted{
+    background-color: green;
+}
+
+#dynamicCenter{
+    display:flex;
+    justify-content: center; /* align horizontal */
+}
+
+#portion{
+    padding-right: 150px;
+}
+
+#clickableFoodItem{
+    display: block;
+    text-align: left;
+    max-width: 80vw;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.dietKey{
+    display:block;
+}
+
+.dietWrapper{
+    display:inline;
+    margin-left: 10%;
+}
+
+.foodDesc{
+    margin-top: 4px;
+    font-size: 9.5px;
+    max-width: 190px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.extraInfo{
+    /* text-align: right; */
+}
+
+.rightBox{
+    text-align: right;
+    margin-left:auto; 
+    margin-right:0;
+    width: 300px;
+}
+
+.dateSearchWrapper{
+    max-width: 250px;
+    display:flex;
+    margin: auto;
+    justify-content: center;
+}
+
+.panel-title{
+    display:inline-block;
+}
+
+.panel-group{
+    width: 1006px;
+    margin: auto;
+}
+
+.rightExtraInfo{
+    text-align: center;
+    float: right;
+    line-height: 35px;
+    /* width: 350px; */
+}
+
+.balanced-legend .desc {
+    width: 125px;
+    font-size: 9.5px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+    padding: 0px 10px;
+}
+
+.icon {
+    margin-left: 5px;
+    margin-right: 5px;
+    height: 30px;
+}
+
+.calendar-wrapper{
+    max-width: 435px;
+    display:flex;
+    margin: auto;
+    justify-content: center;
+}
+
+.date-wrapper {
+    cursor: pointer;
+    font-weight: 600;
+    margin: 10px;
+    width: 125px;
+    height: 125px;
+    text-align: center;
+    border: solid 1px black;
+    -ms-transform: scale(1, 1); /* IE 9 */
+    -webkit-transform: scale(1, 1); /* Safari */
+    transform: scale(1, 1);
+    -moz-transition: -moz-transform .20s ease;
+    -webkit-transition: -webkit-transform .20s ease;
+    -ms-transition: -ms-transform .20s ease;
+    transition: transform .20s ease;    
+}
+.date-wrapper a {
+    color: #444;
+    text-decoration: none;
+}
+
+.date-wrapper:hover, .date-wrapper.active {
+    -ms-transform: scale(1.15, 1.15); /* IE 9 */
+    -webkit-transform: scale(1.15, 1.15); /* Safari */
+    transform: scale(1.15, 1.15);
+    -moz-transition: -moz-transform .20s ease;
+    -webkit-transition: -webkit-transform .20s ease;
+    -ms-transition: -ms-transform .20s ease;
+    transition: transform .20s ease;
+}
+
+.date-weekday{
+    background-color: #066b0a;
+    height: 40px;
+    line-height: 40px;
+    color: white;
+}
+
+.date-month{
+    margin-top: 10px;
+}
+
+.date-day{
+    font-size: 25px;
+}
+
+.glyphicon-chevron-left {
+    top: 60px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.glyphicon-chevron-right {
+    top: 60px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.dropdown-menu>li#highlighted>a:hover{
+    background-color:green;
+}
+
+@media screen and (max-width: 500px) {
+    .calendar-wrapper{
+        max-width: 300px;
+    }
+    
+    .date-wrapper{
+        font-weight: 500;
+        margin: 10px;
+        width: 80px;
+        height: 80px;
+    }
+    
+    .date-weekday{
+        height: 20px;
+        line-height:20px;
+    }
+    
+    .date-month{
+        margin-top: 5px;
+        font-size: 12px;
+    }
+    
+    .date-day{
+        
+    }
+    
+    .glyphicon-chevron-left {
+        top: 40px;
+        font-size: 20px;
+    }
+
+    .glyphicon-chevron-right {
+        top: 40px;
+        font-size: 20px;
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+    .locationsDropdown{
+        min-width: 90vw;
+    }
+    
+    .locationsDropdownMenu{
+        min-width: 90vw;    
+    }
+}
+
+@media screen and (max-width: 635px){
+    .dietWrapper{
+        margin-left: 0px;
+        margin-top: 10px;
+    }
+    
+    .locationsDropdown{
+        min-width: 90vw;
+        width: 208px !important;    
+        font-size: 14px !important;
+    }
+}
+
+@media screen and (max-width: 1020px){
+    .extraInfo{
+        display:none;
+    }
+    
+    .panel-group{
+        max-width: 90vw;    
+    }
+    
+}
+
+.navbar {
+    background-color: #066b0a;
+}
+.navbar a, .navbar-brand {
+    color: white!important;
+}

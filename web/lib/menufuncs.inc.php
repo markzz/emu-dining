@@ -44,15 +44,15 @@ function get_menu($date, $location_id) {
  */
 function generate_filter_icons_html($filters, $img_width = 40) {
     $filter_icons = [
-        'Balanced U'  => 'balanced',
-        'Vegetarian'  => 'vegetarian',
-        'Vegan'       => 'vegan',
-        'Sustainable' => 'sustainable'
+        'Balanced U'  => ['balanced', 'Food that has balanced nutrients &amp; portion size'],
+        'Vegetarian'  => ['vegetarian', 'Containing a sustainable ingredient, such as local produce or seafood'],
+        'Vegan'       => ['vegan', 'Vegan menu options are free of all animal-based ingredients and by-products'],
+        'Sustainable' => ['sustainable', 'Containing no solid meat but may contain eggs or dairy'],
     ];
     $html = '';
     foreach($filters as $filter) {
         if(array_key_exists($filter->name, $filter_icons)) {
-        $html .= '<img src="/assets/img/icon_'.$filter_icons[$filter->name].'.png" style="width:'.$img_width.'px" />';
+        $html .= '<img src="/assets/img/icon_'.$filter_icons[$filter->name][0].'.png" style="margin-right:6px;width:'.$img_width.'px" title="'.$filter_icons[$filter->name][1].'" />';
         }
     }
     return $html;
@@ -70,7 +70,20 @@ function get_avg_rating($item_id) {
 
     $data = $result->fetch(PDO::FETCH_ASSOC);
 
-    return $data['avg'];
+    return round($data['avg']);
+}
+
+function get_locations() {
+    $dbh = DB::connect();
+
+    $q = "SELECT * FROM locations";
+
+    $result = $dbh->query($q);
+    if(!$result) return false;
+
+    $data = $result->fetchAll(PDO::FETCH_ASSOC);
+
+    return $data;
 }
 
 //var_dump(get_menu(date('Y-m-j', time()), "57d6ed562cc8da6ce636371a"));

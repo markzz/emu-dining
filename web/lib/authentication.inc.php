@@ -31,10 +31,21 @@ function auth() {
 
 	$client->authenticate($_GET['code']);
 	$_SESSION['access_token'] = $client->getAccessToken();
-	header('Location: /');
+
+	if(isset($_COOKIE['return_url'])) {
+		$return_url = $_COOKIE['return_url'];
+		unset($_COOKIE['return_url']);
+		header('Location: '.$return_url);
+	}
+	else {
+		header('Location: /');
+	}
 }
 
 function get_user_name() {
+
+	if(!is_logged_in()) return false;
+
 	global $dev_key, $redirect_uri;
 	$client = new Google_Client();
 
@@ -47,11 +58,14 @@ function get_user_name() {
 		$data = $client->verifyIdToken($_SESSION['access_token']['id_token']);
 	}
 
+	if(!$data) return false;
+
 	$service = new Google_Service_Plus($client);
 	return $service->people->get($data['sub'])->displayName;
 }
 
 function get_user_name_from_id($id) {
+	if(!is_logged_in()) return false;
 	global $dev_key, $redirect_uri;
 	$client = new Google_Client();
 	$client->setDeveloperKey($dev_key);
@@ -64,6 +78,9 @@ function get_user_name_from_id($id) {
 }
 
 function get_user_id() {
+
+	if(!isset($_SESSION['access_token'])) return false;
+
 	global $dev_key, $redirect_uri;
 	$client = new Google_Client();
 
@@ -81,5 +98,5 @@ function get_user_id() {
 }
 
 function is_logged_in() {
-	return isset($_SESSION['access_token']);
+	return get_user_id() ? true : false;
 }
