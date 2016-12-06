@@ -9,6 +9,7 @@ $ROUTES = array(
 
 const MENU_PATH = "/menu";
 const LOGIN_PATH = "/login";
+const LOGOUT_PATH = "/logout";
 const AUTH_PATH = "/auth";
 const RATINGS_PATH = "/ratings";
 const CREATE_RATING_PATH = "/create_rating";

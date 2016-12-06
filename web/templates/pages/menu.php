@@ -29,14 +29,16 @@ $dates = create_date_range($earliest_date, $future_date);
 $json_date = json_encode($dates2);*/
 
 // Header
-get_header("Menu");
+get_header($location_info['name'] . " - EMU Dining");
 ?>
 
 <script>
-$('#date-picker').submit(function(e) {
-    var date = $('input', this).val();
-    window.location = '/menu/' + '<?=addslashes($location_info['short_name'])?>/' + date;
-    e.preventDefault();
+$(document).ready(function() {
+    $('#date-picker').submit(function(e) {
+        var date = $('input', this).val();
+        window.location = '/menu/' + '<?=addslashes($location_info['short_name'])?>/' + date;
+        e.preventDefault();
+    });
 });
 </script>
 
@@ -97,7 +99,7 @@ $('#date-picker').submit(function(e) {
 <div class="dateSearchWrapper">
     <form method="post" id="date-picker">
       <div class="input-group input-datepicker show-input">
-            <input type="date" class="form-control" data-format="YYYY/MM/DD" placeholder="YYYY/MM/DD">
+            <input type="date" class="form-control" data-format="YYYY-MM-DD" placeholder="YYYY-MM-DD" value="<?=$date?>">
             <span class="input-group-btn">
                 <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-circle-arrow-right"></span></button>
             </span>

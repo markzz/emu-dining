@@ -11,6 +11,9 @@ if ($path == "") {
 } else if ('/' . $tokens[0] == LOGIN_PATH) {
 	login();
 	include "pages/login.php";
+}else if ('/' . $tokens[0] == LOGOUT_PATH) {
+	logout();
+	header('Location: /');
 } else if ('/' . $tokens[0] == MENU_PATH) {
 	if (!empty($tokens[1])) {
 		if (!menu_exists($tokens[1])) {

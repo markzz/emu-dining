@@ -7,14 +7,19 @@ a{
     text-align: center;
 }
 
+.main-container {
+    margin-bottom:50px;
+}
+
 #locationsDropdown{
-    width: 250px;
+    width: 270px;
     height: 40px;
     font-size: 18px;
 }
 
 #locationsDropdownMenu{
-    width: 250px;
+    width: 270px;
+    font-size: 14px;
 }
 
 #highlighted{
