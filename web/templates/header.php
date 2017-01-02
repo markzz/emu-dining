@@ -35,7 +35,7 @@
         <li><a href="/logout">Logout</a></li>
 
         <?php else: ?>
-        <li><a href="/login">Login with Google</a></li>
+        <li><a href="/login">Login with <b>Google</b></a></li>
         <?php endif; ?>
 
       </ul>
@@ -44,4 +44,4 @@
 </nav>
 
 <!-- begin content -->
-<div class="container">
+<div class="container main-container">

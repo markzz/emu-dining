@@ -7,14 +7,19 @@ a{
     text-align: center;
 }
 
+.main-container {
+    margin-bottom:50px;
+}
+
 #locationsDropdown{
-    width: 250px;
+    width: 270px;
     height: 40px;
     font-size: 18px;
 }
 
 #locationsDropdownMenu{
-    width: 250px;
+    width: 270px;
+    font-size: 14px;
 }
 
 #highlighted{
@@ -43,21 +48,20 @@ a{
 }
 
 .dietWrapper{
-    display:inline;
-    margin-left: 10%;
+    min-width: 120px;
 }
 
 .foodDesc{
     margin-top: 4px;
     font-size: 9.5px;
-    max-width: 190px;
+    max-width: 300px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
 }
 
 .extraInfo{
-    /* text-align: right; */
+    text-align: center;
 }
 
 .rightBox{
@@ -71,6 +75,7 @@ a{
     max-width: 250px;
     display:flex;
     margin: auto;
+    margin-top: 20px;
     justify-content: center;
 }
 
@@ -239,16 +244,46 @@ a{
     .extraInfo{
         display:none;
     }
-    
+
     .panel-group{
         max-width: 90vw;    
     }
-    
 }
 
 .navbar {
     background-color: #066b0a;
 }
+
 .navbar a, .navbar-brand {
     color: white!important;
+}
+
+.navbar-default .navbar-toggle {
+    border-color: white;
+    background-color: white!important;
+    opacity: 0.7;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #066b0a;
+}
+
+.dateSearchWrapper button {
+    color: #066b0a;
+}
+
+.your-rating {
+    cursor: pointer;
+}
+
+.your-rating span.glyphicon-star {
+    color: #ddd;
+}
+
+span.glyphicon-star.on {
+    color: #f4c542;
+}
+
+.review-panel {
+    display: none;
 }
