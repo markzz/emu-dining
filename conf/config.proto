@@ -1,9 +1,9 @@
 [database]
 backend = mysql
-host = 45.63.67.185
+host = localhost
 user = emu_menu
 name = emu_menu
-password = "something really obscure"
+password = somepassword
 
 [options]
 dev-key = something
