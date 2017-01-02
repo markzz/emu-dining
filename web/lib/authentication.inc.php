@@ -101,6 +101,7 @@ function is_logged_in() {
 	return get_user_id() ? true : false;
 }
 
-function log_out() {
+function logout() {
 	unset($_SESSION['access_token']);
 }
+

@@ -7,10 +7,13 @@ $path = isset($_GET["p"]) ? $_GET["p"] : "";
 $tokens = preg_split('/\//', $path);
 
 if ($path == "") {
-	include "pages/home.php";
+	header("Location: /menu/eagle-cafes");
 } else if ('/' . $tokens[0] == LOGIN_PATH) {
 	login();
 	include "pages/login.php";
+}else if ('/' . $tokens[0] == LOGOUT_PATH) {
+	logout();
+	header('Location: /');
 } else if ('/' . $tokens[0] == MENU_PATH) {
 	if (!empty($tokens[1])) {
 		if (!menu_exists($tokens[1])) {
